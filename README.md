@@ -11,7 +11,7 @@ This web app allows you to search for wikipedia articles using a query and a moo
 - title and body term frequencies
 - mood scores. 
 
-By precalculating all of the term frequencies, it allows the app to store a huge corpus of documents while hardly taking up any storage space. It also improves response time drastically. 
+By precalculating all of the term frequencies, it allows the app to store a huge corpus of documents while hardly taking up any storage space (2000 articles take up ~22 MB on my computer). It also improves response time drastically. 
 
 ## How to run the app locally
 #### Prerequisites:
@@ -39,7 +39,7 @@ The core algorithm that the app uses is BM25. I calculate the term frequencies o
 - CORPUS_DIR - directory that the system uses as the corpus for searching and storing newly fetched articles
 - CONTENT_PREVIEW_LENGTH - number of characters of the content that will be saved to the json file
 - MIN_ARTICLE_LENGTH - the minimum number of words in an article required for the system to store it AFTER stopwords have been removed
-- NUM_ARTICLES_TO_FETCH - number of articles to fetch when you run the command to fetch more articles. Will only fetch articles that have more words than MIN_ARTICLE_LENGTH after stopwords have been removed. Maximum value of 500. 
+- NUM_ARTICLES_TO_FETCH - number of articles to fetch when you run the command to fetch more articles. Will only fetch articles that have more words than MIN_ARTICLE_LENGTH after stopwords have been removed. I recommend not going higher than 500 unless you want to wait for a while.
 
 You can also see the mood words and stopwords dictionaries in `constants.py`. 
 
