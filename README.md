@@ -1,5 +1,6 @@
 
 
+
 # WikiMood Search Tool
 ### Final Project for CSCE 470
 #### (The UI is currently is unpolished but fully functional. The backend is done now so I will be focusing on the UI from here on out)
@@ -35,7 +36,7 @@ The flask server should start on port 12000. It is important that the server is 
 Open a new terminal into the ``wikipedia-mood-frontend`` directory. You should have already installed the Angular CLI, so type: `ng serve -o` to start the Angular server. Your web browser should open to the WikiMood UI page. The frontend is now ready to use.  
 
 ### Core Algorithm
-The core algorithm that the app uses is BM25. I calculate the term frequencies of each articles when I fetch them using the MediaWiki API. The code to fetch the articles is in `fetch_articles.py`, and you can fetch more articles if you want by running `python3 fetch_articles.py`. If you do this, you'll see the new articles' json files appearing in the CORPUS_DIR. Their filenames are '*pageid*.json'. You can configure the following parameters by changing the constants in `constants.py` in the backend code:
+The core algorithm that the app uses is BM25. I calculate the term frequencies of each articles when I fetch them using the MediaWiki API. The code to fetch the articles is in `fetch_articles.py`, and you can fetch more articles if you want by running `python3 fetch_articles.py`. If you do this, you'll see the new articles' json files appearing in the CORPUS_DIR (note: you need to stop and restart the backend API server to see new files in the search results). Their filenames are '*pageid*.json'. You can configure the following parameters by changing the constants in `constants.py` in the backend code:
 - CORPUS_DIR - directory that the system uses as the corpus for searching and storing newly fetched articles
 - CONTENT_PREVIEW_LENGTH - number of characters of the content that will be saved to the json file
 - MIN_ARTICLE_LENGTH - the minimum number of words in an article required for the system to store it AFTER stopwords have been removed
