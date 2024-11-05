@@ -1,0 +1,17 @@
+.scores {
+    display: flex;
+    justify-content: center;
+}
+
+.score {
+    border-left: 3px solid black;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-weight: bold;
+} .score:first-child {
+    border: none;
+} 
+
+.search_result {
+    border-bottom: 1px solid black;
+}
