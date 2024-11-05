@@ -1,4 +1,5 @@
 
+
 # WikiMood Search Tool
 ### Final Project for CSCE 470
 #### (The UI is currently is unpolished but fully functional. The backend is done now so I will be focusing on the UI from here on out)
@@ -27,24 +28,23 @@ Open a terminal in the `wikipedia-mood-backend-flask` folder. Create a virtual e
 `` python3 -m venv .venv ``
 Then, run  ``. .venv/bin/activate`` to activate the environment. You should see your command line now says 'venv' somewhere. 
 Install all the required dependencies by typing 
-``pip install -r requirements.txt``
-If everything went well, you can start the backend API server by typing: ``python3 app.py`` (you may need to do python instead of python3 depending on your OS). 
+``pip install -r requirements.txt``. If everything went well, you can start the backend API server by typing: ``python3 app.py`` (you may need to do python instead of python3 depending on your OS). 
 The flask server should start on port 12000. It is important that the server is on port 12000 and not any other port, because the Angular frontend expects port 12000. The backend API is now ready.
 
 #### Starting the Frontend UI server
 Open a new terminal into the ``wikipedia-mood-frontend`` directory. You should have already installed the Angular CLI, so type: `ng serve -o` to start the Angular server. Your web browser should open to the WikiMood UI page. The frontend is now ready to use.  
 
 ### Core Algorithm
-The core algorithm that the app uses is BM25. I calculate the term frequencies of each articles when I fetch them using the MediaWiki API. The code to fetch the articles is in `bm25.py`, and you can fetch more articles if you want by running `python3 fetch_articles.py`. If you do this, you'll see the new articles' json files appearing in the CORPUS_DIR. Their filenames are '*pageid*.json' You can configure the following parameters by changing the constants in `constants.py` in the backend code:
+The core algorithm that the app uses is BM25. I calculate the term frequencies of each articles when I fetch them using the MediaWiki API. The code to fetch the articles is in `fetch_articles.py`, and you can fetch more articles if you want by running `python3 fetch_articles.py`. If you do this, you'll see the new articles' json files appearing in the CORPUS_DIR. Their filenames are '*pageid*.json'. You can configure the following parameters by changing the constants in `constants.py` in the backend code:
 - CORPUS_DIR - directory that the system uses as the corpus for searching and storing newly fetched articles
 - CONTENT_PREVIEW_LENGTH - number of characters of the content that will be saved to the json file
 - MIN_ARTICLE_LENGTH - the minimum number of words in an article required for the system to store it AFTER stopwords have been removed
-- NUM_ARTICLES_TO_FETCH - number of articles to fetch when you run the command to fetch more articles. Will only fetch articles that have more words than MIN_ARTICLE_LENGTH after stopwords have been removed. I advise setting this to 500 or less
+- NUM_ARTICLES_TO_FETCH - number of articles to fetch when you run the command to fetch more articles. Will only fetch articles that have more words than MIN_ARTICLE_LENGTH after stopwords have been removed. Maximum value of 500. 
 
 You can also see the mood words and stopwords dictionaries in `constants.py`. 
 
 ### Verifying the Core Algorithm (BM25)
-I have prepared a corpus directory for Checkpoint 2 called `corpus_checkpoint_2/`. In this corpus you will find processed information about 1000 articles which I have fetched using `fetch_articles.py`. If you go to the frontend UI and perform a search query, you can see the scores assigned to each returned document. The scores displayed are:
+I have prepared a corpus directory for Checkpoint 2 called `corpus_checkpoint_2/`. In this corpus you will find processed information about 2000 articles which I have fetched using `fetch_articles.py`. If you go to the frontend UI and perform a search query, you can see the scores assigned to each returned document. The scores displayed are:
 - Mood-Weighted BM25 Score - the combined score of the mood multiplier and bm25 scores
 - Raw BM25 Score
 - Mood Multiplier - this is calculated by dividing the number of times the article contains mood words for the given mood by the total number of mood words for the mood. For example, if the article "WW2 Skirmish" has the word "death" 5 times and "famine" 2 times (which are both words in the 'Sad' mood list), and there are 14 different words in the 'Sad' mood list, the article's mood multiplier for 'Sad' would be $$ \frac{7}{14}  = 0.5$$
