@@ -1,34 +1,86 @@
-<div style="text-align:center">
-    <h1>Wikipedia Mood-Based Search</h1>
-
-    <input [(ngModel)]="query" name="query" placeholder="Enter search query" />
-    <select [(ngModel)]="mood" name="mood" (change)="onSearch()">
-      <option value="General">General</option>
-      <option value="Curious">Curious</option>
-      <option value="Uplifting">Uplifting</option>
-      <option value="Entertaining">Entertaining</option>
-      <option value="Sad">Sad</option>
-    </select>
-    <button (click)="onSearch()">Search</button>
-  
-    <div *ngIf="results.length > 0">
-        <h2>Search Results</h2>
-        <div> 
-          Show Score Information: 
-          <input type="checkbox" #showScoreInfo [checked]="showScoreInfo" (click)="toggleShowScoreInfo()">
-        </div>
-        <div> Showing {{results.length}} results</div>
-          <div *ngFor="let result of results" class="search_result">
-            <h3><a [href]="result.url" target="_blank">{{ result.title }}</a> </h3>
-            <div class="scores">
-              <div class="scores" *ngIf="showScoreInfo.checked">
-                <div class="score"> Mood-Weighted BM25 Score: {{result.mood_weighted_score.toFixed(3)}} </div>
-                <div class="score"> Raw BM25 Score: {{ result.raw_score.toFixed(3) }} </div>
-                <div class="score"> Mood Multiplier: {{result.mood_score.toFixed(3)}}</div>
-              </div> 
-            </div> 
-            <p>{{ result.snippet }}</p>
-          </div>
-      </div>
+<main>
+  <div class="source-code-link">
+    <a class="source-code-link" 
+      href="https://github.com/calebfrye-tamu/csce470-Final-Project"
+      target="_blank">
+      Source Code
+    </a>
   </div>
-  
+  <div class="mood-search-container">
+    <h1 class="header">WikiMood Mood-Based Search</h1>
+
+    <div class="search-bar">
+      <input 
+        [(ngModel)]="query" 
+        type="search"
+        name="query" 
+        placeholder="Enter a query to find related Wikipedia articles..." 
+        class="search-input"
+        (keyup.enter)="onSearch()" 
+      />
+      <select [(ngModel)]="mood" name="mood" class="mood-select" (change)="onSearch()">
+        <option value="General">General (no mood weight)</option>
+        <option value="Curious">Curious</option>
+        <option value="Uplifting">Uplifting</option>
+        <option value="Entertaining">Entertaining</option>
+        <option value="Sad">Sad</option>
+      </select>
+      <button (click)="onSearch()" class="search-button">Search</button>
+    </div>
+
+    <div class="results-empty-text" *ngIf="results.length <= 0">
+      (Enter a query and mood to see results below)
+    </div>
+
+    <div class="sort-options-container" *ngIf="results.length > 0">
+      <div> Sort by: </div>
+      <div
+        class="sort-option" 
+        (click)="setSort('mood_weighted_score')"
+        [ngClass]="{'active': sortResultsBy === 'mood_weighted_score'}">
+        Mood-Weighted Score
+      </div>
+      <div 
+        class="sort-option" 
+        (click)="setSort('raw_score')"
+        [ngClass]="{'active': sortResultsBy === 'raw_score'}">
+        Raw BM25 Score
+      </div>
+      <div 
+        class="sort-option" 
+        (click)="setSort('mood_score')"
+        [ngClass]="{'active': sortResultsBy === 'mood_score'}">
+        Mood Multiplier
+      </div>
+    </div>
+
+    <div *ngIf="results.length > 0" class="results-container">
+      <div class="results-header">
+        <div style="font-size: larger; font-weight: bold;">Search Results</div>
+        <div>
+          <div class="score-toggle">
+            Show Score Information: 
+            <input 
+              type="checkbox" 
+              #showScoreInfo 
+              [checked]="showScoreInfo" 
+              (click)="toggleShowScoreInfo()" 
+            />
+          </div>
+          <div class="result-count">Showing {{results.length}} results</div>
+        </div>
+      </div>
+      <div *ngFor="let result of results" class="search-result">
+        <h3 class="result-title">
+          <a [href]="result.url" target="_blank">{{ result.title }}</a>
+        </h3>
+        <div *ngIf="showScoreInfo.checked" class="score-info">
+          <div>Mood-Weighted BM25 Score: <b>{{ result.mood_weighted_score.toFixed(3) }}</b></div>
+          <div>Raw BM25 Score: <b>{{ result.raw_score.toFixed(3) }}</b></div>
+          <div>Mood Multiplier: <b>{{ result.mood_score.toFixed(3) }}</b></div>
+        </div>
+        <div class="result-snippet">{{ result.snippet }}...</div>
+      </div>
+    </div>
+  </div>
+</main>

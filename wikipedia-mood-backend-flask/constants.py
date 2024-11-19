@@ -5,7 +5,7 @@ CORPUS_DIR = 'corpus_checkpoint_2'
 
 CONTENT_PREVIEW_LENGTH = 300 #amount of characters of the content stored in the json file
 MIN_ARTICLE_LENGTH = 300 # min length of the articles to fetch AFTER stopwords removed
-NUM_ARTICLES_TO_FETCH = 500
+NUM_ARTICLES_TO_FETCH = 2000
 
 URL = "https://en.wikipedia.org/w/api.php" #url for the WikiMedia API
 
