@@ -3,7 +3,6 @@
 
 # WikiMood Search Tool
 ### Final Project for CSCE 470
-#### (The UI is currently is unpolished but fully functional. The backend is done now so I will be focusing on the UI from here on out)
 
 This web app allows you to search for wikipedia articles using a query and a mood. Articles are ranked against the query using BM25,  and the mood is weighted based on how many times so-called 'mood words' appear in the article. The corpus contains information about each article in a json file, including: 
 - title
@@ -48,8 +47,7 @@ You can also see the mood words and stopwords dictionaries in `constants.py`.
 I have prepared a corpus directory for Checkpoint 2 called `corpus_checkpoint_2/`. In this corpus you will find processed information about 2000 articles which I have fetched using `fetch_articles.py`. If you go to the frontend UI and perform a search query, you can see the scores assigned to each returned document. The scores displayed are:
 - Mood-Weighted BM25 Score - the combined score of the mood multiplier and bm25 scores
 - Raw BM25 Score
-- Mood Multiplier - this is calculated by dividing the number of times the article contains mood words for the given mood by the total number of mood words for the mood. For example, if the article "WW2 Skirmish" has the word "death" 5 times and "famine" 2 times (which are both words in the 'Sad' mood list), and there are 14 different words in the 'Sad' mood list, the article's mood multiplier for 'Sad' would be $$ \frac{7}{14}  = 0.5$$
-
+- Mood Multiplier - this is calculated by dividing the number of times the article contains mood words for the given mood by the total number of mood words for the mood. For example, if the article "WW2 Skirmish" has the word "death" 5 times and "famine" 2 times (which are both words in the 'Sad' mood list), and there are 14 different words in the 'Sad' mood list, the article's mood multiplier for 'Sad' would be 7 / 14 = 0.5
 #### Verification of BM25
 If you perform some queries in the frontend using the 'General' mood (mood weight always = 1) and look at the Raw BM25 score, you will be able to see that the highest ranked articles are indeed relevant to your query. Additionally, examine the code in `bm25.py` to see my BM25 logic. I believe you will find that it is correct. 
 
