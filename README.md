@@ -3,7 +3,6 @@
 
 # WikiMood Search Tool
 ### Final Project for CSCE 470
-#### (The UI is currently is unpolished but fully functional. The backend is done now so I will be focusing on the UI from here on out)
 
 This web app allows you to search for wikipedia articles using a query and a mood. Articles are ranked against the query using BM25,  and the mood is weighted based on how many times so-called 'mood words' appear in the article. The corpus contains information about each article in a json file, including: 
 - title
