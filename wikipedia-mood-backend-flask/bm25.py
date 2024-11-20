@@ -4,7 +4,7 @@ from collections import defaultdict
 from constants import *
 from helper_functions import tokenize
 
-titleWeight = 0.75
+titleWeight = 1.5
 bodyWeight = 0.5
 B_title = 0.75
 B_body = 0.5
