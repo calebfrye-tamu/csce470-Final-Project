@@ -7,7 +7,9 @@ import { Observable } from 'rxjs';
 })
 export class WikiSearchService {
 
-  private apiUrl = 'http://localhost:12000/search';  // Backend URL
+  // private apiUrl = 'http://localhost:12000/search';  // Backend URL
+  private apiUrl = 'https://csce470-final-project-backend-api.onrender.com/search';  // Backend URL
+
 
   constructor(private http: HttpClient) {}
 
