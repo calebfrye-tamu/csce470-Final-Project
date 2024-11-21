@@ -1,13 +1,15 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from bm25 import *
 app = Flask(__name__)
 CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 #call this function upon program start to precalculate all necessary information
 articles, idfs, avg_title_len, avg_body_len = load_articles_and_compute_idfs()
 
 @app.route('/search', methods=['POST'])
+@cross_origin
 def search_articles():
     data = request.get_json()
     query = data.get('query', '')
