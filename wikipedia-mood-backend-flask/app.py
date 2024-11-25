@@ -9,7 +9,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 articles, idfs, avg_title_len, avg_body_len = load_articles_and_compute_idfs()
 
 @app.route('/search', methods=['POST'])
-@cross_origin
+@cross_origin()
 def search_articles():
     data = request.get_json()
     query = data.get('query', '')
